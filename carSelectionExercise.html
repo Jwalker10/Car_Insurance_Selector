@@ -7,9 +7,6 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Car Selection Exercise</title>
-        <script defer>
-
-        </script>
         <style>
             * {
                 font-family: Arial, Helvetica, sans-serif;
@@ -71,23 +68,68 @@
         <main>
             <section id="filter">
                 <h1>Select your car&colon; </h1>
-                <select name="brand" id="brandSelection">
-                    <option value="">Please choose a brand</option>
-                    <optgroup label="Brands:"></optgroup>
-                </select>
-                <select name="model" id="modelSelection">
-                    <option value="">Please choose a model</option>
-                    <optgroup label="Models:"></optgroup>
-                </select>
+                <select name="brand" id="brandSelection" onchange="modelListChange()"></select>
+                <select name="model" id="modelSelection"></select>
             </section>
 
             <section id="information">
+                <noscript>Sorry, your browser does not support JavaScript or has it disabled!</noscript>
             </section>
         </main>
 
         <footer>
             <p>Enable Your JavaScript!</p>
         </footer>
+
+        <script>
+            // arrays of brands and models of cars 
+            let brands = ["Ford", "Toyota", "Vauxhall"];
+            // brand models are grouped together, model gorups in models index is identical to brand in brands index 
+            let models =  [["Fiesta", "Focus", "Galaxy", "Ka", "Mondeo"],  ["Aygo", "Corolla", "Prius", "Land Cruiser", "Supra"],  
+            ["Astra", "Corsa", "Crossland", "Grandland", "Insignia", "Mokka"]];
+
+            // handles the car brand options available to select
+            // creates <option> tags for select element for elements in arrays specified 
+            for (let brand in brands) {
+                let brandDropDown = document.getElementById("brandSelection");
+                let newDropDownOption = document.createElement("option");
+                newDropDownOption.innerHTML = brands[brand];
+                newDropDownOption.setAttribute("value", brands[brand]);
+                brandDropDown.appendChild(newDropDownOption);
+            };
+
+            // retrieves value of selected option and saves to variable
+            let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
+
+            // creates initial <option> tags for select element for elements in arrays specified
+                for (let model in models[selectedBrandIndex]) {
+                    let modelDropDown = document.getElementById("modelSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = models[selectedBrandIndex][model];
+                    modelDropDown.appendChild(newDropDownOption);
+                };
+
+            // handles the car model options available to select
+            function modelListChange() {
+                // deletes current options in select element so that repeats do not occur
+                let modelSelector = document.getElementById("modelSelection");
+                while (modelSelector.lastChild) {
+                    modelSelector.removeChild(modelSelector.lastChild);
+                };
+
+                // retrieves value of selected option and saves to variable
+                let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
+
+                // creates new <option> tags for select element for elements in arrays specified
+                for (let model in models[selectedBrandIndex]) {
+                    let modelDropDown = document.getElementById("modelSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = models[selectedBrandIndex][model];
+                    modelDropDown.appendChild(newDropDownOption);
+                };
+            }
+            
+        </script>
     </body>
 
 </html>
