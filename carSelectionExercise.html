@@ -34,8 +34,11 @@
             }
 
             #filter h1 {
-                margin-right: 1%;
                 font-size: 2rem;
+            }
+
+            #filter h1, h4 {
+                margin-right: 1%;
             }
 
             #filter select {
@@ -68,7 +71,9 @@
         <main>
             <section id="filter">
                 <h1>Select your car&colon; </h1>
+                <h4>Brand:</h4>
                 <select name="brand" id="brandSelection" onchange="modelListChange()"></select>
+                <h4>Model:</h4>
                 <select name="model" id="modelSelection"></select>
             </section>
 
