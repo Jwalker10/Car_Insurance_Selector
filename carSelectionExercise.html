@@ -93,6 +93,7 @@
             let models =  [["Fiesta", "Focus", "Galaxy", "Ka", "Mondeo"],  ["Aygo", "Corolla", "Prius", "Land Cruiser", "Supra"],  
             ["Astra", "Corsa", "Crossland", "Grandland", "Insignia", "Mokka"]];
 
+            /* for intial page load so selection doesn't bug having no intial selected values */
             // handles the car brand options available to select
             // creates <option> tags for select element for elements in arrays specified 
             for (let brand in brands) {
@@ -103,17 +104,18 @@
                 brandDropDown.appendChild(newDropDownOption);
             };
 
-            // retrieves value of selected option and saves to variable
+            // retrieves index of selected option and saves to variable
             let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
 
             // creates initial <option> tags for select element for elements in arrays specified
-                for (let model in models[selectedBrandIndex]) {
-                    let modelDropDown = document.getElementById("modelSelection");
-                    let newDropDownOption = document.createElement("option");
-                    newDropDownOption.innerHTML = models[selectedBrandIndex][model];
-                    modelDropDown.appendChild(newDropDownOption);
-                };
+            for (let model in models[selectedBrandIndex]) {
+                let modelDropDown = document.getElementById("modelSelection");
+                let newDropDownOption = document.createElement("option");
+                newDropDownOption.innerHTML = models[selectedBrandIndex][model];
+                modelDropDown.appendChild(newDropDownOption);
+            };
 
+            /* to handle all selection of values after initial page load */
             // handles the car model options available to select
             function modelListChange() {
                 // deletes current options in select element so that repeats do not occur
@@ -122,7 +124,7 @@
                     modelSelector.removeChild(modelSelector.lastChild);
                 };
 
-                // retrieves value of selected option and saves to variable
+                // retrieves index of selected option and saves to variable
                 let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
 
                 // creates new <option> tags for select element for elements in arrays specified
@@ -132,8 +134,23 @@
                     newDropDownOption.innerHTML = models[selectedBrandIndex][model];
                     modelDropDown.appendChild(newDropDownOption);
                 };
-            }
+            };  
             
+            /* let selectedBrandIndex is already defined on ln 108 and can be reused below  */ 
+            // retrieves index of selected option and saves to variable
+            let selectedModelIndex = document.getElementById("modelSelection").selectedIndex;
+
+            // retrieves value of selected option and saves to variable
+            let selectedBrand = brands[selectedBrandIndex];
+            let selectedModel = models[selectedBrandIndex][selectedModelIndex];
+
+            /* for intial page load so selection doesn't bug having no intial selected values */
+            // handles display of selected car brand and model information
+            let information = document.getElementById("information");
+            let newInfo = document.createElement("section");
+            newInfo.innerHTML = selectedBrand + " " + selectedModel;
+            information.appendChild(newInfo);
+
         </script>
     </body>
 
