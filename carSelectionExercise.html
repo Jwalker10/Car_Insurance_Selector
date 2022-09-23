@@ -72,9 +72,9 @@
             <section id="filter">
                 <h1>Select your car&colon; </h1>
                 <h4>Brand:</h4>
-                <select name="brand" id="brandSelection" onchange="modelListChange()"></select>
+                <select name="brand" id="brandSelection" onchange="modelListChange(); infoDisplayChange()"></select>
                 <h4>Model:</h4>
-                <select name="model" id="modelSelection"></select>
+                <select name="model" id="modelSelection" onchange="infoDisplayChange()"></select>
             </section>
 
             <section id="information">
@@ -151,6 +151,30 @@
             newInfo.innerHTML = selectedBrand + " " + selectedModel;
             information.appendChild(newInfo);
 
+            // function to handle display of selected car brand and model information after initial load
+            function infoDisplayChange() {
+                // retrieves index of selected option and saves to variable
+                let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
+                let selectedModelIndex = document.getElementById("modelSelection").selectedIndex;
+
+                // retrieves value of selected option and saves to variable
+                let selectedBrand = brands[selectedBrandIndex];
+                let selectedModel = models[selectedBrandIndex][selectedModelIndex];
+
+                // handles display of selected car brand and model information
+                // gets information element and creates section element with selected brand and model
+                let information = document.getElementById("information");
+                let newInfo = document.createElement("section");
+                newInfo.innerHTML = selectedBrand + " " + selectedModel;
+
+                // deletes currently displayed information in element id information so that info does not overplap on display
+                while (information.lastChild) {
+                    information.removeChild(information.lastChild);
+                };
+
+                // adds created section element to display now previous info has been deleted
+                information.appendChild(newInfo);
+            };
         </script>
     </body>
 
