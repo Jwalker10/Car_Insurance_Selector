@@ -7,6 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Car Selection Exercise</title>
+        <link rel="icon" type="image/x-icon" href="wheel_icon.png">
         <style>
             * {
                 font-family: Arial, Helvetica, sans-serif;
@@ -23,8 +24,8 @@
 
             #companyTitle {
                 margin-left: 1%;
-                color: blue;
-                text-shadow: 1px 1px 1px rgba(0, 0, 255, 0.712);
+                color: black;
+                text-shadow: 2px 2px 2px black;
             }
 
             #filter {
@@ -50,6 +51,8 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
+                padding: 2%;
+                border: 1px solid black;
             }
 
             footer {
@@ -75,6 +78,12 @@
                 <select name="brand" id="brandSelection" onchange="modelListChange(); infoDisplayChange()"></select>
                 <h4>Model:</h4>
                 <select name="model" id="modelSelection" onchange="infoDisplayChange()"></select>
+                <h4>Year:</h4>
+                <select name="year" id="yearSelection" onchange="infoDisplayChange()"></select>
+                <h4>Engine Size:</h4>
+                <select name="engineSize" id="engineSizeSelection" onchange="infoDisplayChange()"></select>
+                <h4>Colour:</h4>
+                <select name="colour" id="colourSelection" onchange="infoDisplayChange()"></select>
             </section>
 
             <section id="information">
@@ -82,16 +91,19 @@
             </section>
         </main>
 
-        <footer>
-            <p>Enable Your JavaScript!</p>
-        </footer>
-
         <script>
             // arrays of brands and models of cars 
             let brands = ["Ford", "Toyota", "Vauxhall"];
             // brand models are grouped together, model gorups in models index is identical to brand in brands index 
             let models =  [["Fiesta", "Focus", "Galaxy", "Ka", "Mondeo"],  ["Aygo", "Corolla", "Prius", "Land Cruiser", "Supra"],  
             ["Astra", "Corsa", "Crossland", "Grandland", "Insignia", "Mokka"]];
+            // earliest possible year that can be selected for available models
+            let earliestYear = 1951;
+            // engine sizes grouped by loose category 
+            let engineSizes = [">1.0L", "1.0L - 2.0L", "2.0L - 3.0L", "3.0L<"];
+            // filters are grouped together so that a for loop can format the display of selected information
+            let filters = ["Brand: ", "Model: ", "Year: ", "Engine Size: ", "Colour: "];
+
 
             /* for intial page load so selection doesn't bug having no intial selected values */
             // handles the car brand options available to select
@@ -115,6 +127,7 @@
                 modelDropDown.appendChild(newDropDownOption);
             };
 
+
             /* to handle all selection of values after initial page load */
             // handles the car model options available to select
             function modelListChange() {
@@ -135,20 +148,42 @@
                     modelDropDown.appendChild(newDropDownOption);
                 };
             };  
+
+
+            // display year selection options within year select element
+            for (let i = 2022; i >= earliestYear; i--) {
+                let yearDropDown = document.getElementById("yearSelection");
+                let newDropDownOption = document.createElement("option");
+                newDropDownOption.innerHTML = i;
+                yearDropDown.appendChild(newDropDownOption);
+            };
+            
+            // display engine size selection options within year select element
+            for (let engineSize in engineSizes) {
+                let engineSizeDropDown = document.getElementById("engineSizeSelection");
+                let newDropDownOption = document.createElement("option");
+                newDropDownOption.innerHTML = engineSizes[engineSize];
+                engineSizeDropDown.appendChild(newDropDownOption);
+            };
+
             
             /* let selectedBrandIndex is already defined on ln 108 and can be reused below  */ 
             // retrieves index of selected option and saves to variable
             let selectedModelIndex = document.getElementById("modelSelection").selectedIndex;
+            let selectedEngineSizeIndex = document.getElementById("engineSizeSelection").selectedIndex;
 
             // retrieves value of selected option and saves to variable
             let selectedBrand = brands[selectedBrandIndex];
             let selectedModel = models[selectedBrandIndex][selectedModelIndex];
+            let selectedYear = document.getElementById("yearSelection").value;
+            let selectedEngineSize = engineSizes[selectedEngineSizeIndex];
+            
 
             /* for intial page load so selection doesn't bug having no intial selected values */
             // handles display of selected car brand and model information
             let information = document.getElementById("information");
             let newInfo = document.createElement("section");
-            newInfo.innerHTML = selectedBrand + " " + selectedModel;
+            newInfo.innerHTML = selectedBrand + "<br>" + selectedModel  + "<br>" + selectedYear  + "<br>" + selectedEngineSize;
             information.appendChild(newInfo);
 
             // function to handle display of selected car brand and model information after initial load
@@ -156,16 +191,19 @@
                 // retrieves index of selected option and saves to variable
                 let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
                 let selectedModelIndex = document.getElementById("modelSelection").selectedIndex;
+                let selectedEngineSizeIndex = document.getElementById("engineSizeSelection").selectedIndex;
 
                 // retrieves value of selected option and saves to variable
                 let selectedBrand = brands[selectedBrandIndex];
                 let selectedModel = models[selectedBrandIndex][selectedModelIndex];
+                let selectedYear = document.getElementById("yearSelection").value;
+                let selectedEngineSize = engineSizes[selectedEngineSizeIndex];
 
                 // handles display of selected car brand and model information
                 // gets information element and creates section element with selected brand and model
                 let information = document.getElementById("information");
                 let newInfo = document.createElement("section");
-                newInfo.innerHTML = selectedBrand + " " + selectedModel;
+                newInfo.innerHTML = selectedBrand + "<br>" + selectedModel + "<br>" + selectedYear  + "<br>" + selectedEngineSize;
 
                 // deletes currently displayed information in element id information so that info does not overplap on display
                 while (information.lastChild) {
