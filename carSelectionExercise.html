@@ -18,23 +18,14 @@
                 padding: 0px;
             }
 
-            header {
-                border-bottom: 1px solid black;
-            }
-
-            #companyTitle {
-                margin-left: 1%;
-                color: black;
-                text-shadow: 2px 2px 2px black;
-            }
-
             #filter {
-                margin: 2% 0% 0% 2%;
                 display: flex;
                 align-items: center;
+                border-bottom: 3px solid black;
             }
 
             #filter h1 {
+                margin: 0% 0% 0% 2%;
                 font-size: 2rem;
             }
 
@@ -50,9 +41,7 @@
             #information {
                 display: flex;
                 align-items: center;
-                justify-content: space-evenly;
                 padding: 2%;
-                border: 1px solid black;
             }
 
             footer {
@@ -67,10 +56,6 @@
     </head>
 
     <body>
-        <header>
-            <h2 id="companyTitle">Company Cross Page Header</h2>
-        </header>
-
         <main>
             <section id="filter">
                 <h1>Select your car&colon; </h1>
@@ -101,6 +86,8 @@
             let earliestYear = 1951;
             // engine sizes grouped by loose category 
             let engineSizes = [">1.0L", "1.0L - 2.0L", "2.0L - 3.0L", "3.0L<"];
+            // array of colours to choose from and an other option which allows option to specify other
+            let colours = ["Black", "White", "Gray", "Silver", "Red", "Blue", "Brown", "Green", "Beige", "Orange", "Other"];
             // filters are grouped together so that a for loop can format the display of selected information
             let filters = ["Brand: ", "Model: ", "Year: ", "Engine Size: ", "Colour: "];
 
