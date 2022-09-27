@@ -40,7 +40,8 @@
 
             #information {
                 display: flex;
-                align-items: center;
+                justify-items: center;
+                flex-direction: column;
                 padding: 2%;
                 font-size: larger;
                 word-spacing: 5px;
@@ -178,10 +179,25 @@
             // handles display of selected information
             let information = document.getElementById("information");
             let newInfo = document.createElement("section");
-            newInfo.innerHTML = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
-                + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
-                + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
+            let selectedInfo = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
+                    + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
+                    + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
+            newInfo.innerHTML = selectedInfo;
             information.appendChild(newInfo);
+
+            // -------------------------------------------------------------------------------------------------
+
+            // creates submit button for release of form information to back-end (once backend has been constructed)
+            let submitBtn = document.createElement("input");
+            submitBtn.setAttribute("type", "submit");
+            submitBtn.setAttribute("name", "submitBtn");
+            submitBtn.setAttribute("value", "Submit");
+            submitBtn.style.margin = "1% 0% 0% 0%";
+            submitBtn.style.padding = "5px";
+            submitBtn.style.width = "fit-content";
+            information.appendChild(submitBtn);
+
+            // -------------------------------------------------------------------------------------------------
 
             // function to handle display of selected car brand and model information after initial load
             function infoDisplayChange() {
@@ -201,13 +217,34 @@
                 let selectedEngineSize = engineSizes[selectedEngineSizeIndex];
                 let selectedColour = colours[selectedColourIndex];
 
+                // -------------------------------------------------------------------------------------------------
+
+                // creates input element incase selection of 'Other: ' colour option
+                let ifOther = document.createElement("input");
+                ifOther.setAttribute("type", "text");
+                ifOther.setAttribute("name", "otherOption");
+                ifOther.setAttribute("placeholder", "if other, please specify");
+                ifOther.style.width = "150px";
+
+                // creates and adds submit button for release of form information to back-end (once backend has been constructed)
+                let submitBtn = document.createElement("input");
+                submitBtn.setAttribute("type", "submit");
+                submitBtn.setAttribute("name", "submitBtn");
+                submitBtn.setAttribute("value", "Submit");
+                submitBtn.style.margin = "1% 0% 0% 0%";
+                submitBtn.style.padding = "5px";
+                submitBtn.style.width = "fit-content";
+
+                // -------------------------------------------------------------------------------------------------
+
                 // handles display of selected car brand and model information
                 // gets information element and creates section element with selected brand and model
                 let information = document.getElementById("information");
                 let newInfo = document.createElement("section");
-                newInfo.innerHTML = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
+                let selectedInfo = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
                     + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
                     + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
+                newInfo.innerHTML = selectedInfo;
 
                 // deletes currently displayed information in element id information so that info does not overplap on display
                 while (information.lastChild) {
@@ -216,6 +253,16 @@
 
                 // adds created section element to display now previous info has been deleted
                 information.appendChild(newInfo);
+
+                // -------------------------------------------------------------------------------------------------
+
+                // adds option to specify other colour than those available to select if 'Other: ' is selected
+                if (colours[selectedColourIndex] === "Other: ") {
+                    information.appendChild(ifOther);
+                };
+
+                // finally adds the submit button for release of form information to back-end (once backend has been constructed)
+                information.appendChild(submitBtn);
             };
         </script>
     </body>
