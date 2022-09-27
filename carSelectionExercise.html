@@ -42,15 +42,9 @@
                 display: flex;
                 align-items: center;
                 padding: 2%;
-            }
-
-            footer {
-                position: absolute;
-                top: 100%;
-                padding: 1%;
-                border: 1px solid black;
-                width: fit-content;
-                float: right;
+                font-size: larger;
+                word-spacing: 5px;
+                line-height: 30px;
             }
         </style>
     </head>
@@ -65,7 +59,7 @@
                 <select name="model" id="modelSelection" onchange="infoDisplayChange()"></select>
                 <h4>Year:</h4>
                 <select name="year" id="yearSelection" onchange="infoDisplayChange()"></select>
-                <h4>Engine Size:</h4>
+                <h4>Engine:</h4>
                 <select name="engineSize" id="engineSizeSelection" onchange="infoDisplayChange()"></select>
                 <h4>Colour:</h4>
                 <select name="colour" id="colourSelection" onchange="infoDisplayChange()"></select>
@@ -88,8 +82,6 @@
             let engineSizes = [">1.0L", "1.0L - 2.0L", "2.0L - 3.0L", "3.0L<"];
             // array of colours to choose from and an other option which allows option to specify other
             let colours = ["Black", "White", "Gray", "Silver", "Red", "Blue", "Brown", "Green", "Beige", "Orange", "Other: "];
-            // filters are grouped together so that a for loop can format the display of selected information
-            let filters = ["Brand: ", "Model: ", "Year: ", "Engine Size: ", "Colour: "];
 
             // -------------------------------------------------------------------------------------------------
 
@@ -180,14 +172,22 @@
             
 
             /* for intial page load so selection doesn't bug having no intial selected values */
-            // handles display of selected car brand and model information
+            // filters are grouped together so that they can format the display of selected information
+            let filters = ["Brand: ", "Model: ", "Year: ", "Engine: ", "Colour: "];
+
+            // handles display of selected information
             let information = document.getElementById("information");
             let newInfo = document.createElement("section");
-            newInfo.innerHTML = selectedBrand + "<br>" + selectedModel  + "<br>" + selectedYear  + "<br>" + selectedEngineSize  + "<br>" + selectedColour;
+            newInfo.innerHTML = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
+                + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
+                + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
             information.appendChild(newInfo);
 
             // function to handle display of selected car brand and model information after initial load
             function infoDisplayChange() {
+                // filters are grouped together so that they can format the display of selected information
+                let filters = ["Brand: ", "Model: ", "Year: ", "Engine: ", "Colour: "];
+
                 // retrieves index of selected option and saves to variable
                 let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
                 let selectedModelIndex = document.getElementById("modelSelection").selectedIndex;
@@ -205,7 +205,9 @@
                 // gets information element and creates section element with selected brand and model
                 let information = document.getElementById("information");
                 let newInfo = document.createElement("section");
-                newInfo.innerHTML = selectedBrand + "<br>" + selectedModel + "<br>" + selectedYear  + "<br>" + selectedEngineSize  + "<br>" + selectedColour;
+                newInfo.innerHTML = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
+                    + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
+                    + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
 
                 // deletes currently displayed information in element id information so that info does not overplap on display
                 while (information.lastChild) {
