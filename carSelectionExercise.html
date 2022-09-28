@@ -8,14 +8,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Car Selection Exercise</title>
         <link rel="icon" type="image/x-icon" href="wheel_icon.png">
+        <link rel="stylesheet" href="AsusRog-Regular.ttf">
         <style>
+            @font-face {
+                font-family: "AsusRog";
+                src: url(AsusRog-Regular.ttf);
+            }
+
             * {
-                font-family: Arial, Helvetica, sans-serif;
+                font-family: "AsusRog";
+                letter-spacing: 2px;
             }
 
             body {
                 margin: 0px;
                 padding: 0px;
+            }
+
+            header {
+                display: flex;
+                align-items: center;
+                background-color: #8D0000;
+                color: white;
+            }
+
+            header img {
+                margin: 1%;
+                height: 40px;
             }
 
             #filter {
@@ -46,12 +65,18 @@
                 font-size: larger;
                 word-spacing: 5px;
                 line-height: 30px;
+                border: 1px solid black;
             }
         </style>
     </head>
 
     <body>
         <main>
+            <header>
+                <img src="wheel_icon.png" alt="">
+                <h3>Wheeler's Imaginary Car Insurance</h3>
+            </header>
+
             <section id="filter">
                 <h1>Select your car&colon; </h1>
                 <h4>Brand:</h4>
