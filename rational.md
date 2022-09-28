@@ -17,3 +17,9 @@ I put myself in the shoes of a company, I don’t want to be spending my develop
 Now the basics for the project are complete I can focus on any creative additions I want to make to improve upon the current design.
 
 -------------------------
+
+## Walkthrough of skills used
+
+Good imagination and spacial visualisation skills, demonstrated by the extensive manipulation of the DOM using JS.
+
+-------------------------

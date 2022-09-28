@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Car Selection Exercise</title>
         <link rel="icon" type="image/x-icon" href="wheel_icon.png">
-        <link rel="stylesheet" href="AsusRog-Regular.ttf">
+        <link rel="font/ttf" href="AsusRog-Regular.ttf">
         <style>
             @font-face {
                 font-family: "AsusRog";
@@ -132,11 +132,9 @@
                 <noscript>Sorry, your browser does not support JavaScript or has it disabled!</noscript>
             </section>
 
-            <footer>
-
-            </footer>
+            <footer></footer>
         </main>
-
+        
         <script>
             // Arrays for selection options
             // -------------------------------------------------------------------------------------------------
@@ -359,10 +357,23 @@
             
             /* uses selectedInfoArr which is returned from infoDisplayChange, to calculate a quote to display on screen */
             function getQuote(selectedInfoArr) {
-                let testInfo = document.createElement("p");
-                testInfo.innerHTML = "Test";
                 let information = document.getElementById("information");
-                information.appendChild(testInfo);
+                let quoteDisplay = document.createElement("section");
+                quoteDisplay.style.position = "absolute";
+                quoteDisplay.style.top = "36%";
+                quoteDisplay.style.left = "35%";
+                quoteDisplay.style.width = "35%";
+                quoteDisplay.style.backgroundColor = "white";
+                quoteDisplay.style.color = "black";
+                quoteDisplay.style.padding = "1%";
+                quoteDisplay.style.border = "5px ridge #8D0000";
+
+                let insurancePerWeek = 1;
+                let insurancePerYear = 1;
+
+                let quoteTemplate = "Car insurance for your selected vehicle could be around £" + insurancePerWeek + " a week or £" + insurancePerYear + " a year. Call +4418274206969 to speak to one of our agents and get your policy started."
+                quoteDisplay.innerHTML = quoteTemplate;
+                information.appendChild(quoteDisplay);
             };
 
             /* sets submitBtn attribute onclick to call function getQuote which has function infoDisplayChange passed as an argument 
