@@ -72,6 +72,9 @@
         </main>
 
         <script>
+            // Arrays for selection options
+            // -------------------------------------------------------------------------------------------------
+
             // arrays of brands and models of cars 
             let brands = ["Ford", "Toyota", "Vauxhall"];
             // brand models are grouped together, model gorups in models index is identical to brand in brands index 
@@ -84,9 +87,10 @@
             // array of colours to choose from and an other option which allows option to specify other
             let colours = ["Black", "White", "Gray", "Silver", "Red", "Blue", "Brown", "Green", "Beige", "Orange", "Other: "];
 
+            // initial loading of brand options and model options, then changing of model selection upon selection of an alternate brand
             // -------------------------------------------------------------------------------------------------
 
-            /* for intial page load so selection doesn't bug having no intial selected values */
+            /* for initial page load so selection doesn't bug having no initial selected values */
             // handles the car brand options available to select
             // creates <option> tags for select element for elements in arrays specified 
             for (let brand in brands) {
@@ -129,6 +133,7 @@
                 };
             };  
 
+            // initial loading of year, engine size and colour options
             // -------------------------------------------------------------------------------------------------
 
             // display year selection options within year select element
@@ -139,7 +144,7 @@
                 yearDropDown.appendChild(newDropDownOption);
             };
             
-            // display engine size selection options within year select element
+            // display engine size selection options within engine select element
             for (let engineSize in engineSizes) {
                 let engineSizeDropDown = document.getElementById("engineSizeSelection");
                 let newDropDownOption = document.createElement("option");
@@ -147,8 +152,7 @@
                 engineSizeDropDown.appendChild(newDropDownOption);
             };
 
-            // -------------------------------------------------------------------------------------------------
-
+            // display colour selection options within colour select element
             for (let colour in colours) {
                 let colourDropDown = document.getElementById("colourSelection");
                 let newDropDownOption = document.createElement("option");
@@ -156,6 +160,7 @@
                 colourDropDown.appendChild(newDropDownOption);
             };
 
+            // handling the initial display of information when page has loaded and creates submit button
             // -------------------------------------------------------------------------------------------------
             
             /* let selectedBrandIndex is already defined on ln 108 and can be reused below  */ 
@@ -172,10 +177,9 @@
             let selectedColour = colours[selectedColourIndex];
             
 
-            /* for intial page load so selection doesn't bug having no intial selected values */
+            /* for initial page load so selection doesn't bug having no initial selected values */
             // filters are grouped together so that they can format the display of selected information
             let filters = ["Brand: ", "Model: ", "Year: ", "Engine: ", "Colour: "];
-
             // handles display of selected information
             let information = document.getElementById("information");
             let newInfo = document.createElement("section");
@@ -184,8 +188,6 @@
                     + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
             newInfo.innerHTML = selectedInfo;
             information.appendChild(newInfo);
-
-            // -------------------------------------------------------------------------------------------------
 
             // creates submit button for release of form information to back-end (once backend has been constructed)
             let submitBtn = document.createElement("input");
@@ -197,10 +199,15 @@
             submitBtn.style.width = "fit-content";
             information.appendChild(submitBtn);
 
+
+            // function to change displayed information upon a change in selection of html select elements
+            /* (code within function infoDisplayChange is mostly repeated from initial page load above) */
             // -------------------------------------------------------------------------------------------------
 
-            // function to handle display of selected car brand and model information after initial load
+            // function to handle display of selected information after initial load
             function infoDisplayChange() {
+                // arrays redefined within function
+                // -------------------------------------------------------------------------------------------------
                 // filters are grouped together so that they can format the display of selected information
                 let filters = ["Brand: ", "Model: ", "Year: ", "Engine: ", "Colour: "];
 
@@ -217,6 +224,7 @@
                 let selectedEngineSize = engineSizes[selectedEngineSizeIndex];
                 let selectedColour = colours[selectedColourIndex];
 
+                // recreates submit button and creates optional other text input
                 // -------------------------------------------------------------------------------------------------
 
                 // creates input element incase selection of 'Other: ' colour option
@@ -235,10 +243,10 @@
                 submitBtn.style.padding = "5px";
                 submitBtn.style.width = "fit-content";
 
+                // handles display of selected information
                 // -------------------------------------------------------------------------------------------------
 
-                // handles display of selected car brand and model information
-                // gets information element and creates section element with selected brand and model
+                // gets information element and creates section element with selected information inside appending to html
                 let information = document.getElementById("information");
                 let newInfo = document.createElement("section");
                 let selectedInfo = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
