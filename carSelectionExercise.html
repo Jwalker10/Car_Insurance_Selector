@@ -17,44 +17,72 @@
 
             * {
                 font-family: "AsusRog";
-                letter-spacing: 2px;
+                font-weight: bold;
             }
 
             body {
                 margin: 0px;
                 padding: 0px;
+                background-color: black;
+            }
+
+            main {
+                display: flex;
+                flex-direction: column;
             }
 
             header {
                 display: flex;
                 align-items: center;
-                background-color: #8D0000;
                 color: white;
+                border-top: 10px ridge #8D0000;
             }
 
             header img {
                 margin: 1%;
                 height: 40px;
+                border-radius: 50%;
+                border: 5px dashed #8D0000;;
+            }
+
+            #callToAction {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border: 3px groove rgba(128, 128, 128, 0.603);
+                border-radius: 30%;
+                color: black;
+                background-color: white;
+            }
+
+            #callToAction h3 {
+                padding: 0.5% 0.5% 0.5% 1.5%;
             }
 
             #filter {
                 display: flex;
                 align-items: center;
-                border-bottom: 3px solid black;
+                padding: 10px;
+                border-bottom: 3px groove rgba(128, 128, 128, 0.603);
+                color: white;
             }
 
             #filter h1 {
-                margin: 0% 0% 0% 2%;
+                margin: 0% 1% 0% 2%;
                 font-size: 2rem;
             }
 
-            #filter h1, h4 {
+            #filter h3 {
                 margin-right: 1%;
+                color: #8D0000;
+                
             }
 
             #filter select {
                 height: 2rem;
-                margin-right: 1%;
+                margin-right: 0.5%;
+                border: 3px solid #8D0000;
+                border-radius: 30%;
             }
 
             #information {
@@ -65,7 +93,16 @@
                 font-size: larger;
                 word-spacing: 5px;
                 line-height: 30px;
-                border: 1px solid black;
+                color: white;
+            }
+
+            footer {
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 0px; 
+                border-top: 10px ridge #8D0000;
+                background: #8D0000;
             }
         </style>
     </head>
@@ -77,23 +114,31 @@
                 <h3>Wheeler's Imaginary Car Insurance</h3>
             </header>
 
+            <section id="callToAction">
+                <h3>"You can be insured for as little as £50 per week or £500 per year,</h3><h3>Get a quote now!"</h3>
+            </section>
+
             <section id="filter">
                 <h1>Select your car&colon; </h1>
-                <h4>Brand:</h4>
+                <h3>Brand:</h3>
                 <select name="brand" id="brandSelection" onchange="modelListChange(); infoDisplayChange()"></select>
-                <h4>Model:</h4>
+                <h3>Model:</h3>
                 <select name="model" id="modelSelection" onchange="infoDisplayChange()"></select>
-                <h4>Year:</h4>
+                <h3>Year:</h3>
                 <select name="year" id="yearSelection" onchange="infoDisplayChange()"></select>
-                <h4>Engine:</h4>
+                <h3>Engine:</h3>
                 <select name="engineSize" id="engineSizeSelection" onchange="infoDisplayChange()"></select>
-                <h4>Colour:</h4>
+                <h3>Colour:</h3>
                 <select name="colour" id="colourSelection" onchange="infoDisplayChange()"></select>
             </section>
 
             <section id="information">
                 <noscript>Sorry, your browser does not support JavaScript or has it disabled!</noscript>
             </section>
+
+            <footer>
+
+            </footer>
         </main>
 
         <script>
@@ -218,7 +263,7 @@
             let submitBtn = document.createElement("input");
             submitBtn.setAttribute("type", "submit");
             submitBtn.setAttribute("name", "submitBtn");
-            submitBtn.setAttribute("value", "Submit");
+            submitBtn.setAttribute("value", "Get a Quote");
             submitBtn.style.margin = "1% 0% 0% 0%";
             submitBtn.style.padding = "5px";
             submitBtn.style.width = "fit-content";
@@ -263,7 +308,7 @@
                 let submitBtn = document.createElement("input");
                 submitBtn.setAttribute("type", "submit");
                 submitBtn.setAttribute("name", "submitBtn");
-                submitBtn.setAttribute("value", "Submit");
+                submitBtn.setAttribute("value", "Get a Quote");
                 submitBtn.style.margin = "1% 0% 0% 0%";
                 submitBtn.style.padding = "5px";
                 submitBtn.style.width = "fit-content";
