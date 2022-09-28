@@ -35,7 +35,7 @@
                 display: flex;
                 align-items: center;
                 color: white;
-                border-top: 10px ridge #8D0000;
+                border-top: 10px ridge white;
             }
 
             header img {
@@ -64,19 +64,19 @@
                 align-items: center;
                 padding: 10px;
                 border-bottom: 3px groove rgba(128, 128, 128, 0.603);
-                color: white;
+                color: #8D0000;
             }
 
             #filter h1 {
                 margin: 0% 1% 0% 2%;
                 font-size: 2rem;
+                text-shadow: 2px 0px 2px grey;
             }
 
             #filter h3 {
                 margin-right: 1%;
-                color: #8D0000;
-                
-            }
+                text-shadow: 1px 0px 1px grey;             
+            } 
 
             #filter select {
                 height: 2rem;
@@ -101,8 +101,8 @@
                 bottom: 0;
                 width: 100%;
                 height: 0px; 
-                border-top: 10px ridge #8D0000;
-                background: #8D0000;
+                border-top: 10px ridge white;
+                background: white;
             }
         </style>
     </head>
@@ -113,10 +113,6 @@
                 <img src="wheel_icon.png" alt="">
                 <h3>Wheeler's Imaginary Car Insurance</h3>
             </header>
-
-            <section id="callToAction">
-                <h3>"You can be insured for as little as £50 per week or £500 per year,</h3><h3>Get a quote now!"</h3>
-            </section>
 
             <section id="filter">
                 <h1>Select your car&colon; </h1>
@@ -302,7 +298,7 @@
                 ifOther.setAttribute("type", "text");
                 ifOther.setAttribute("name", "otherOption");
                 ifOther.setAttribute("placeholder", "if other, please specify");
-                ifOther.style.width = "150px";
+                ifOther.style.width = "200px";
 
                 // creates and adds submit button for release of form information to back-end (once backend has been constructed)
                 let submitBtn = document.createElement("input");
@@ -341,7 +337,14 @@
 
                 // finally adds the submit button for release of form information to back-end (once backend has been constructed)
                 information.appendChild(submitBtn);
+
+                // returns selected info so it can be passed into getQuote() to formulate a quote
+                return ;
             };
+
+            function getQuote() {
+
+            }
         </script>
     </body>
 
