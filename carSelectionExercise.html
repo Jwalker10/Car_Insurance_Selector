@@ -344,13 +344,31 @@
                 // finally adds the submit button for release of form information to back-end (once backend has been constructed)
                 information.appendChild(submitBtn);
 
+                /* sets submitBtn attribute onclick to call function getQuote which has function infoDisplayChange passed as an argument 
+                calling it and returning selectedInfo passing it into getQuote as selectedInfoArr, subsequently getQuote uses selectedInfoArr to 
+                calculate a quote to display on screen */
+                submitBtn.setAttribute("onclick", "getQuote(infoDisplayChange())");
+
                 // returns selected info so it can be passed into getQuote() to formulate a quote
-                return ;
+                return selectedInfo;
             };
 
-            function getQuote() {
 
-            }
+            // takes selected information after submitBtn has been pressed and formulates a quote displaying to information in html
+            // -------------------------------------------------------------------------------------------------
+            
+            /* uses selectedInfoArr which is returned from infoDisplayChange, to calculate a quote to display on screen */
+            function getQuote(selectedInfoArr) {
+                let testInfo = document.createElement("p");
+                testInfo.innerHTML = "Test";
+                let information = document.getElementById("information");
+                information.appendChild(testInfo);
+            };
+
+            /* sets submitBtn attribute onclick to call function getQuote which has function infoDisplayChange passed as an argument 
+            calling it and returning selectedInfo passing it into getQuote as selectedInfoArr, subsequently getQuote uses selectedInfoArr to 
+            calculate a quote to display on screen */
+            submitBtn.setAttribute("onclick", "getQuote(infoDisplayChange())");
         </script>
     </body>
 
