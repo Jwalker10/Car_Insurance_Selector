@@ -249,10 +249,14 @@
             // handles display of selected information
             let information = document.getElementById("information");
             let newInfo = document.createElement("section");
-            let selectedInfo = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
-                    + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
-                    + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
-            newInfo.innerHTML = selectedInfo;
+            let selectedInfo = [selectedBrand, selectedModel, selectedYear, selectedEngineSize, selectedColour];
+            // formats display of selected information
+            for (let selectedOption in selectedInfo) {
+                newInfo.innerHTML += filters[selectedOption];
+                newInfo.innerHTML += selectedInfo[selectedOption];
+                newInfo.innerHTML += "<br>";
+            };
+            // appends newInfo to the information element
             information.appendChild(newInfo);
 
             // creates submit button for release of form information to back-end (once backend has been constructed)
@@ -311,14 +315,16 @@
 
                 // handles display of selected information
                 // -------------------------------------------------------------------------------------------------
-
-                // gets information element and creates section element with selected information inside appending to html
+                // handles display of selected information
                 let information = document.getElementById("information");
                 let newInfo = document.createElement("section");
-                let selectedInfo = ("<b>" + filters[0] + "</b>"  + selectedBrand) + "<br>" + ("<b>" + filters[1] + "</b>"  + selectedModel)
-                    + "<br>" + ("<b>" + filters[2] + "</b>"  + selectedYear) + "<br>" + ("<b>" + filters[3] + "</b>" + selectedEngineSize)
-                    + "<br>" + ("<b>" + filters[4] + "</b>"  + selectedColour);
-                newInfo.innerHTML = selectedInfo;
+                let selectedInfo = [selectedBrand, selectedModel, selectedYear, selectedEngineSize, selectedColour];
+                // formats display of selected information
+                for (let selectedOption in selectedInfo) {
+                    newInfo.innerHTML += filters[selectedOption];
+                    newInfo.innerHTML += selectedInfo[selectedOption];
+                    newInfo.innerHTML += "<br>";
+                };
 
                 // deletes currently displayed information in element id information so that info does not overplap on display
                 while (information.lastChild) {
