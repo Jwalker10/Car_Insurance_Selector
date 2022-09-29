@@ -383,10 +383,10 @@
                 
                 // nested switch statement to calculate insurancePerYear based on brand and model
                 // brands are arbitrarily priced however models have been priced based loosely on cost
-                switch (selectedInfo[0]) {
+                switch (selectedInfoArr[0]) {
                     case "Ford":
                         insurancePerYear += 120;
-                        switch (selectedInfo[1]) {
+                        switch (selectedInfoArr[1]) {
                             case "Ka":
                                 insurancePerYear += 40;
                                 break;
@@ -408,7 +408,7 @@
                         break;
                     case "Toyota":
                         insurancePerYear += 100;
-                        switch (selectedInfo[1]) {
+                        switch (selectedInfoArr[1]) {
                             case "Aygo":
                                 insurancePerYear += 40;
                                 break;
@@ -430,7 +430,7 @@
                         break;
                     case "Vauxhall":
                         insurancePerYear += 140;
-                        switch (selectedInfo[1]) {
+                        switch (selectedInfoArr[1]) {
                             case "Corsa":
                                 insurancePerYear += 40;
                                 break;
@@ -458,16 +458,16 @@
                 };
 
                 // car age effects insurance price (effects varying and relationship is not linear)
-                if (selectedInfo[2] < 1982) {
+                if (selectedInfoArr[2] < 1982) {
                     // classic car
                     insurancePerYear += 3000;
-                } else if (selectedInfo[2] >= 1982 && selectedInfo[2] <= 2010) {
+                } else if (selectedInfoArr[2] >= 1982 && selectedInfoArr[2] <= 2010) {
                     // old but not classic
                     insurancePerYear += 800;
-                } else if (selectedInfo[2] > 2010 && selectedInfo[2] <= 2020) {
+                } else if (selectedInfoArr[2] > 2010 && selectedInfoArr[2] <= 2020) {
                     // relatively new
                     insurancePerYear += 300;
-                } else if (selectedInfo[2] > 2020) {
+                } else if (selectedInfoArr[2] > 2020) {
                     // basically brand new
                     insurancePerYear += 600;
                 } else {
@@ -475,7 +475,7 @@
                 };
 
                 // increased engine size increases insurance cost
-                switch (selectedInfo[3]) {
+                switch (selectedInfoArr[3]) {
                     case ">1.0L":
                         insurancePerYear += 20;
                         break;
@@ -493,9 +493,15 @@
                 };
 
                 // because red is an aggressive colour it could encourage crashes which increases insurance cost
-                if (selectedInfo[4] === "Red") {
+                if (selectedInfoArr[4] === "Red") {
                     insurancePerYear += 20;
                 };
+
+                // insurancePerWeek = insurancePerYear / weeks in a year, then multiplied by 2 as interest for not paying upfront
+                insurancePerWeek = (insurancePerYear / 52) * 2;
+
+                // insurancePerWeek can go beyond 2 d.c. so .toPrecision() method is used to keep int within decimal currency format
+                insurancePerWeek = insurancePerWeek.toPrecision(4);
 
                 // display price quote by manipulating inner HTML
                 // -------------------------------------------------------------------------------------------------
