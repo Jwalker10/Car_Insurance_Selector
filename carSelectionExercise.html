@@ -142,8 +142,9 @@
             // arrays of brands and models of cars 
             let brands = ["Ford", "Toyota", "Vauxhall"];
             // brand models are grouped together, model gorups in models index is identical to brand in brands index 
-            let models =  [["Fiesta", "Focus", "Galaxy", "Ka", "Mondeo"],  ["Aygo", "Corolla", "Prius", "Land Cruiser", "Supra"],  
-            ["Astra", "Corsa", "Crossland", "Grandland", "Insignia", "Mokka"]];
+            // models are loosely organized by cost left to right (low cost to high cost)
+            let models =  [["Ka", "Fiesta", "Focus", "Mondeo", "Galaxy"],  ["Aygo", "Prius", "Corolla", "Land Cruiser", "Supra"],  
+            ["Corsa", "Astra", "Mokka", "Crossland", "Grandland", "Insignia"]];
             // earliest possible year that can be selected for available models
             let earliestYear = 1951;
             // engine sizes grouped by loose category 
@@ -357,8 +358,13 @@
             
             /* uses selectedInfoArr which is returned from infoDisplayChange, to calculate a quote to display on screen */
             function getQuote(selectedInfoArr) {
+                
+                // creates html and css to structure and style price quote
+                // -------------------------------------------------------------------------------------------------
+
                 let information = document.getElementById("information");
                 let quoteDisplay = document.createElement("section");
+                /* would very much like to use jQuery .css() method in future lol */
                 quoteDisplay.style.position = "absolute";
                 quoteDisplay.style.top = "36%";
                 quoteDisplay.style.left = "35%";
@@ -368,8 +374,131 @@
                 quoteDisplay.style.padding = "1%";
                 quoteDisplay.style.border = "5px ridge #8D0000";
 
-                let insurancePerWeek = 1;
-                let insurancePerYear = 1;
+                // calculates price quote
+                // -------------------------------------------------------------------------------------------------
+
+                // just need to install a way to calculate quote prices
+                let insurancePerWeek = 0;
+                let insurancePerYear = 0;
+                
+                // nested switch statement to calculate insurancePerYear based on brand and model
+                // brands are arbitrarily priced however models have been priced based loosely on cost
+                switch (selectedInfo[0]) {
+                    case "Ford":
+                        insurancePerYear += 120;
+                        switch (selectedInfo[1]) {
+                            case "Ka":
+                                insurancePerYear += 40;
+                                break;
+                            case "Fiesta":
+                                insurancePerYear += 60;
+                                break;
+                            case "Focus":
+                                insurancePerYear += 80;
+                                break;
+                            case "Mondeo":
+                                insurancePerYear += 100;
+                                break;
+                            case "Galaxy":
+                                insurancePerYear += 120;
+                                break;
+                            default:
+                                insurancePerYear = "Error";
+                        };
+                        break;
+                    case "Toyota":
+                        insurancePerYear += 100;
+                        switch (selectedInfo[1]) {
+                            case "Aygo":
+                                insurancePerYear += 40;
+                                break;
+                            case "Prius":
+                                insurancePerYear += 60;
+                                break;
+                            case "Corolla":
+                                insurancePerYear += 80;
+                                break;
+                            case "Land Cruiser":
+                                insurancePerYear += 100;
+                                break;
+                            case "Galaxy":
+                                insurancePerYear += 120;
+                                break;
+                            default:
+                                insurancePerYear = "Error";
+                        };
+                        break;
+                    case "Vauxhall":
+                        insurancePerYear += 140;
+                        switch (selectedInfo[1]) {
+                            case "Corsa":
+                                insurancePerYear += 40;
+                                break;
+                            case "Astra":
+                                insurancePerYear += 60;
+                                break;
+                            case "Mokka":
+                                insurancePerYear += 80;
+                                break;
+                            case "Crossland":
+                                insurancePerYear += 100;
+                                break;
+                            case "Grandland":
+                                insurancePerYear += 120;
+                                break;
+                            case "Insignia":
+                                insurancePerYear += 140;
+                                break;
+                            default:
+                                insurancePerYear = "Error";
+                        };
+                        break;
+                    default:
+                        insurancePerYear = "Error";
+                };
+
+                // car age effects insurance price (effects varying and relationship is not linear)
+                if (selectedInfo[2] < 1982) {
+                    // classic car
+                    insurancePerYear += 3000;
+                } else if (selectedInfo[2] >= 1982 && selectedInfo[2] <= 2010) {
+                    // old but not classic
+                    insurancePerYear += 800;
+                } else if (selectedInfo[2] > 2010 && selectedInfo[2] <= 2020) {
+                    // relatively new
+                    insurancePerYear += 300;
+                } else if (selectedInfo[2] > 2020) {
+                    // basically brand new
+                    insurancePerYear += 600;
+                } else {
+                    insurancePerYear = "Error";
+                };
+
+                // increased engine size increases insurance cost
+                switch (selectedInfo[3]) {
+                    case ">1.0L":
+                        insurancePerYear += 20;
+                        break;
+                    case "1.0L - 2.0L":
+                        insurancePerYear += 40;
+                        break;
+                    case "2.0L - 3.0L":
+                        insurancePerYear += 80;
+                        break;
+                    case "3.0L<":
+                        insurancePerYear += 160;
+                        break;
+                    default:
+                        insurancePerYear = "Error";
+                };
+
+                // because red is an aggressive colour it could encourage crashes which increases insurance cost
+                if (selectedInfo[4] === "Red") {
+                    insurancePerYear += 20;
+                };
+
+                // display price quote by manipulating inner HTML
+                // -------------------------------------------------------------------------------------------------
 
                 let quoteTemplate = "Car insurance for your selected vehicle could be around £" + insurancePerWeek + " a week or £" + insurancePerYear + " a year. Call +4418274206969 to speak to one of our agents and get your policy started."
                 quoteDisplay.innerHTML = quoteTemplate;

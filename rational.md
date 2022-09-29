@@ -20,6 +20,11 @@ Now the basics for the project are complete I can focus on any creative addition
 
 ## Walkthrough of skills used
 
-Good imagination and spacial visualisation skills, demonstrated by the extensive manipulation of the DOM using JS.
+Although the webpage might not be as visually appealing as one might of hoped, as a developer in training my end goal was to showcase as many skills as possible within one project.
+
+### Skills: 
+
+
+Good imagination and spacial visualisation skills, demonstrated by the extensive manipulation of the DOM using JS to construct large portions of the site that need to be dynamic.
 
 -------------------------
