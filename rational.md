@@ -16,6 +16,12 @@ I put myself in the shoes of a company, I don’t want to be spending my develop
 
 Now the basics for the project are complete I can focus on any creative additions I want to make to improve upon the current design.
 
+### Given more time I would add:
+
++ Better responsiveness to the page for smaller screens.
++ A more scalable back-end e.g. using a database, allowing for easier inputing of new options without bloating the JS beyond maintainability.
++ Use of frameworks and libraries e.g. SASS and jQuery to reduce lines of code increasing readbility and if scaled to a business level reduce load time.
+
 -------------------------
 
 ## Walkthrough of skills used
@@ -25,6 +31,14 @@ Although the webpage might not be as visually appealing as one might of hoped, a
 ### Skills: 
 
 
-Good imagination and spacial visualisation skills, demonstrated by the extensive manipulation of the DOM using JS to construct large portions of the site that need to be dynamic.
++ Good imagination and spacial visualisation skills, demonstrated by the extensive manipulation of the DOM using JS to construct large portions of the site that need to be dynamic.
+
++ Use of built in methods, demonstrating good knowledge of codebase but also excellent ability to find and use documentation.
+
++ Good understanding of scope and the ability to use this to make complex code with multiple functions.
+
++ Excellent handle on the basics, although not being an exceptional skill setting me apart from the rest. I can transfer my understanding to new technologies making me a flexible developer.
+
++ My emphasis on building a dynamic webpage for the purposes of scalability shows an understanding of what is required in a business level setting.
 
 -------------------------
