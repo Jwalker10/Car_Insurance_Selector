@@ -152,128 +152,60 @@
             // array of colours to choose from and an other option which allows option to specify other
             let colours = ["Black", "White", "Gray", "Silver", "Red", "Blue", "Brown", "Green", "Beige", "Orange", "Other: "];
 
-            // initial loading of brand options and model options, then changing of model selection upon selection of an alternate brand
+            // initial loading of selection options
             // -------------------------------------------------------------------------------------------------
-
-            /* for initial page load so selection doesn't bug having no initial selected values */
-            // handles the car brand options available to select
-            // creates <option> tags for select element for elements in arrays specified 
-            for (let brand in brands) {
-                let brandDropDown = document.getElementById("brandSelection");
-                let newDropDownOption = document.createElement("option");
-                newDropDownOption.innerHTML = brands[brand];
-                newDropDownOption.setAttribute("value", brands[brand]);
-                brandDropDown.appendChild(newDropDownOption);
-            };
-
-            // retrieves index of selected option and saves to variable
-            let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
-
-            // creates initial <option> tags for select element for elements in arrays specified
-            for (let model in models[selectedBrandIndex]) {
-                let modelDropDown = document.getElementById("modelSelection");
-                let newDropDownOption = document.createElement("option");
-                newDropDownOption.innerHTML = models[selectedBrandIndex][model];
-                modelDropDown.appendChild(newDropDownOption);
-            };
-
-            /* to handle all selection of values after initial page load */
-            // handles the car model options available to select
-            function modelListChange() {
-                // deletes current options in select element so that repeats do not occur
-                let modelSelector = document.getElementById("modelSelection");
-                while (modelSelector.lastChild) {
-                    modelSelector.removeChild(modelSelector.lastChild);
+            function initialSelectionLoad() {
+                // handles the car brand options available to select
+                // creates <option> tags for select element for elements in arrays specified 
+                for (let brand in brands) {
+                    let brandDropDown = document.getElementById("brandSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = brands[brand];
+                    newDropDownOption.setAttribute("value", brands[brand]);
+                    brandDropDown.appendChild(newDropDownOption);
                 };
 
                 // retrieves index of selected option and saves to variable
                 let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
 
-                // creates new <option> tags for select element for elements in arrays specified
+                // handles the car model options available to select
                 for (let model in models[selectedBrandIndex]) {
                     let modelDropDown = document.getElementById("modelSelection");
                     let newDropDownOption = document.createElement("option");
                     newDropDownOption.innerHTML = models[selectedBrandIndex][model];
                     modelDropDown.appendChild(newDropDownOption);
                 };
+
+                // initial loading of year, engine size and colour options
+                // -------------------------------------------------------------------------------------------------
+
+                // display year selection options within year select element
+                for (let i = 2022; i >= earliestYear; i--) {
+                    let yearDropDown = document.getElementById("yearSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = i;
+                    yearDropDown.appendChild(newDropDownOption);
+                };
+                
+                // display engine size selection options within engine select element
+                for (let engineSize in engineSizes) {
+                    let engineSizeDropDown = document.getElementById("engineSizeSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = engineSizes[engineSize];
+                    engineSizeDropDown.appendChild(newDropDownOption);
+                };
+
+                // display colour selection options within colour select element
+                for (let colour in colours) {
+                    let colourDropDown = document.getElementById("colourSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = colours[colour];
+                    colourDropDown.appendChild(newDropDownOption);
+                };      
             };  
 
-            // initial loading of year, engine size and colour options
+            // function to initially load and then change, displayed information upon a change in selection of html select elements
             // -------------------------------------------------------------------------------------------------
-
-            // display year selection options within year select element
-            for (let i = 2022; i >= earliestYear; i--) {
-                let yearDropDown = document.getElementById("yearSelection");
-                let newDropDownOption = document.createElement("option");
-                newDropDownOption.innerHTML = i;
-                yearDropDown.appendChild(newDropDownOption);
-            };
-            
-            // display engine size selection options within engine select element
-            for (let engineSize in engineSizes) {
-                let engineSizeDropDown = document.getElementById("engineSizeSelection");
-                let newDropDownOption = document.createElement("option");
-                newDropDownOption.innerHTML = engineSizes[engineSize];
-                engineSizeDropDown.appendChild(newDropDownOption);
-            };
-
-            // display colour selection options within colour select element
-            for (let colour in colours) {
-                let colourDropDown = document.getElementById("colourSelection");
-                let newDropDownOption = document.createElement("option");
-                newDropDownOption.innerHTML = colours[colour];
-                colourDropDown.appendChild(newDropDownOption);
-            };
-
-            // handling the initial display of information when page has loaded and creates submit button
-            // -------------------------------------------------------------------------------------------------
-            
-            /* let selectedBrandIndex is already defined on ln 108 and can be reused below  */ 
-            // retrieves index of selected option and saves to variable
-            let selectedModelIndex = document.getElementById("modelSelection").selectedIndex;
-            let selectedEngineSizeIndex = document.getElementById("engineSizeSelection").selectedIndex;
-            let selectedColourIndex = document.getElementById("colourSelection").selectedIndex;
-
-            // retrieves value of selected option and saves to variable
-            let selectedBrand = brands[selectedBrandIndex];
-            let selectedModel = models[selectedBrandIndex][selectedModelIndex];
-            let selectedYear = document.getElementById("yearSelection").value;
-            let selectedEngineSize = engineSizes[selectedEngineSizeIndex];
-            let selectedColour = colours[selectedColourIndex];
-            
-
-            /* for initial page load so selection doesn't bug having no initial selected values */
-            // filters are grouped together so that they can format the display of selected information
-            let filters = ["Brand: ", "Model: ", "Year: ", "Engine: ", "Colour: "];
-            // handles display of selected information
-            let information = document.getElementById("information");
-            let newInfo = document.createElement("section");
-            let selectedInfo = [selectedBrand, selectedModel, selectedYear, selectedEngineSize, selectedColour];
-            // formats display of selected information
-            for (let selectedOption in selectedInfo) {
-                newInfo.innerHTML += filters[selectedOption];
-                newInfo.innerHTML += selectedInfo[selectedOption];
-                newInfo.innerHTML += "<br>";
-            };
-            // appends newInfo to the information element
-            information.appendChild(newInfo);
-
-            // creates submit button for release of form information to back-end (once backend has been constructed)
-            let submitBtn = document.createElement("input");
-            submitBtn.setAttribute("type", "submit");
-            submitBtn.setAttribute("name", "submitBtn");
-            submitBtn.setAttribute("value", "Get a Quote");
-            submitBtn.style.margin = "1% 0% 0% 0%";
-            submitBtn.style.padding = "5px";
-            submitBtn.style.width = "fit-content";
-            information.appendChild(submitBtn);
-
-
-            // function to change displayed information upon a change in selection of html select elements
-            /* (code within function infoDisplayChange is mostly repeated from initial page load above) */
-            // -------------------------------------------------------------------------------------------------
-
-            // function to handle display of selected information after initial load
             function infoDisplayChange() {
                 // arrays redefined within function
                 // -------------------------------------------------------------------------------------------------
@@ -350,6 +282,27 @@
 
                 // returns selected info so it can be passed into getQuote() to formulate a quote
                 return selectedInfo;
+            };
+
+            /* to handle model selection options after alternate brand has been selected */
+            // handles the car model options available to select
+            function modelListChange() {
+                // deletes current options in select element so that repeats do not occur
+                let modelSelector = document.getElementById("modelSelection");
+                while (modelSelector.lastChild) {
+                    modelSelector.removeChild(modelSelector.lastChild);
+                };
+
+                // retrieves index of selected option and saves to variable
+                let selectedBrandIndex = document.getElementById("brandSelection").selectedIndex;
+
+                // creates new <option> tags for select element for elements in arrays specified
+                for (let model in models[selectedBrandIndex]) {
+                    let modelDropDown = document.getElementById("modelSelection");
+                    let newDropDownOption = document.createElement("option");
+                    newDropDownOption.innerHTML = models[selectedBrandIndex][model];
+                    modelDropDown.appendChild(newDropDownOption);
+                };
             };
 
 
@@ -510,6 +463,9 @@
                 quoteDisplay.innerHTML = quoteTemplate;
                 information.appendChild(quoteDisplay);
             };
+
+            initialSelectionLoad();
+            infoDisplayChange();
 
             /* sets submitBtn attribute onclick to call function getQuote which has function infoDisplayChange passed as an argument 
             calling it and returning selectedInfo passing it into getQuote as selectedInfoArr, subsequently getQuote uses selectedInfoArr to 
